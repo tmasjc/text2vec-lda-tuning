@@ -18,41 +18,22 @@ ui <- fluidPage(
     extendShinyjs(text = jscode),
     sidebarLayout(
         sidebarPanel(
-            numericInput(
-                "topics",
-                "Number of Topics:",
-                value = 3,
-                min   = 1,
-                max   = 99,
-                step  = 1/2,
-            ),
-            tags$hr(),
-            sliderInput(
-                "doc_topic_prior",
-                "Document-Topic Prior:",
-                value = 0.1,
-                min   = 0.05,
-                max   = 1,
-                step  = 0.05
+            # (¯`·._.·(¯`·._.·(¯`·._.· CONTROL ·._.·´¯)·._.·´¯)·._.·´¯)
+            numericInput("topics", "Number of Topics:", 
+                         value = 3, min = 1, max = 99, step = 1/2,
+            ), tags$hr(),
+            # (¯`·._.·(¯`·._.·(¯`·._.· CONTROL ·._.·´¯)·._.·´¯)·._.·´¯)
+            sliderInput("doc_topic_prior", "Document-Topic Prior:",
+                         value = 0.1, min = 0.05, max = 1, step = 0.05
+            ), tags$hr(),
+            # (¯`·._.·(¯`·._.·(¯`·._.· CONTROL ·._.·´¯)·._.·´¯)·._.·´¯)
+            numericInput("word_topic_prior", "Word-Topic prior:",
+                         value = 0.001, min = 0.0001, max = 1, step = 0.0
             ), 
-            tags$hr(),
-            numericInput(
-                "word_topic_prior",
-                "Word-Topic prior:",
-                value = 0.001,
-                min   = 0.0001,
-                max   = 1,
-                step  = 0.0
-            ), 
-            numericInput(
-                "word_topic_prior_step",
-                "Step for Word-Topic prior:",
-                value = 0.0001,
-                min   = 0.0001,
-                max   = 0.01,
-                step  = 0.0001/2
-            ),
-            tags$hr(),
+            numericInput("word_topic_prior_step", "Step for Word-Topic prior:",
+                         value = 0.0001, min = 0.0001, max = 0.01, step = 0.0001/2
+            ), tags$hr(),
+            # (¯`·._.·(¯`·._.·(¯`·._.· CONTROL ·._.·´¯)·._.·´¯)·._.·´¯)
             fileInput("rds", "Upload dtm file", accept = ""),
             actionButton("go", "Fit model", width = "100%")
         ),
