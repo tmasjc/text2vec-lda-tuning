@@ -38,8 +38,12 @@ ui <- fluidPage(
             textInput("seed", "Random Seed (optional)", value = "1234", width = "100%", 
                       placeholder = "Do not leave blank."),
             # (¯`·._.·(¯`·._.·(¯`·._.· CONTROL ·._.·´¯)·._.·´¯)·._.·´¯)
-            fileInput("rds", "Upload dtm file", accept = ""),
-            actionButton("go", "Fit model", width = "100%")
+            fileInput("rds", HTML("Upload <i>dtm.</i> File"), accept = ""),
+            actionButton("go", "Fit model", width = "100%"),
+            tags$hr(),
+            # (¯`·._.·(¯`·._.·(¯`·._.· FOOTNOTE ·._.·´¯)·._.·´¯)·._.·´¯)
+            tags$strong("DOCS"),
+            tags$p("http://text2vec.org/topic_modeling")
         ),
         mainPanel(
             withSpinner(visOutput('ldavis'), type = 8, color = "#333333")
