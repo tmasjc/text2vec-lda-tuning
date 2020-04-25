@@ -3,6 +3,7 @@ library(text2vec)
 library(LDAvis)
 library(shinyjs)
 library(servr)
+library(shinycssloaders)
 
 # set theme if lib is available
 skin = ifelse(require(shinythemes), shinytheme("cosmo"), NULL)
@@ -27,18 +28,21 @@ ui <- fluidPage(
                          value = 0.1, min = 0.05, max = 1, step = 0.05
             ), tags$hr(),
             # (¯`·._.·(¯`·._.·(¯`·._.· CONTROL ·._.·´¯)·._.·´¯)·._.·´¯)
-            numericInput("word_topic_prior", "Word-Topic prior:",
+            numericInput("word_topic_prior", "Word-Topic Prior:",
                          value = 0.001, min = 0.0001, max = 1, step = 0.0
             ), 
-            numericInput("word_topic_prior_step", "Step for Word-Topic prior:",
+            numericInput("word_topic_prior_step", "Step for Word-Topic Prior:",
                          value = 0.0001, min = 0.0001, max = 0.01, step = 0.0001/2
             ), tags$hr(),
+            # (¯`·._.·(¯`·._.·(¯`·._.· CONTROL ·._.·´¯)·._.·´¯)·._.·´¯)
+            textInput("seed", "Random Seed (optional)", value = "1234", width = "100%", 
+                      placeholder = "Do not leave blank."),
             # (¯`·._.·(¯`·._.·(¯`·._.· CONTROL ·._.·´¯)·._.·´¯)·._.·´¯)
             fileInput("rds", "Upload dtm file", accept = ""),
             actionButton("go", "Fit model", width = "100%")
         ),
         mainPanel(
-            visOutput('ldavis')
+            withSpinner(visOutput('ldavis'), type = 8, color = "#333333")
         )
     )
 )
@@ -59,6 +63,10 @@ server <- function(input, output, session) {
         
         # let error fails naturally and be displayed on screen
         dtm <- readRDS(input$rds$datapath)
+        
+        # initiate random seeding
+        rs = ifelse(isTruthy(input$seed), input$seed, "1234")
+        set.seed(as.numeric(rs))
         
         # create model based on user's inputs
         lda_model <- LDA$new(
