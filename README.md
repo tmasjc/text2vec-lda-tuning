@@ -4,3 +4,5 @@ A Shiny application to provide convenience for tuning Latent Dirichlet Allocatio
 
 ![](screenshot.png)
 
+* A demo application can be found [here](https://tmasjc.shinyapps.io/text2vec-lda-tuning/); 
+* [Example](Example) directory consists of a walkthrough on how to generate **.dtm** file needed;
