@@ -38,7 +38,7 @@ ui <- fluidPage(
             textInput("seed", "Random Seed (optional)", value = "1234", width = "100%", 
                       placeholder = "Do not leave blank."),
             # (¯`·._.·(¯`·._.·(¯`·._.· CONTROL ·._.·´¯)·._.·´¯)·._.·´¯)
-            fileInput("rds", HTML("Upload <i>dtm.</i> File"), accept = ""),
+            fileInput("rds", HTML("Upload <i>.dtm</i> File <br>(see Example directory)"), accept = ""),
             actionButton("go", "Fit model", width = "100%"),
             tags$hr(),
             # (¯`·._.·(¯`·._.·(¯`·._.· FOOTNOTE ·._.·´¯)·._.·´¯)·._.·´¯)
