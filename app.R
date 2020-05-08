@@ -1,6 +1,7 @@
 library(shiny)
 library(text2vec)
 library(LDAvis)
+library(V8)
 library(shinyjs)
 library(servr)
 library(shinycssloaders)
